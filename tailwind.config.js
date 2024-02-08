@@ -6,6 +6,10 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
+
+      gridTemplateColumns: {
+        "custom-notes": "repeat(auto-fit, minmax(280px, 1fr))",
+      },
     },
   },
   plugins: [],

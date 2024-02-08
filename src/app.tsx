@@ -4,7 +4,7 @@ import { NoteCard } from "./components/note-card";
 
 export function App() {
   return (
-    <div className="mx-auto max-w-6xl my-12 space-y-6">
+    <div className="mx-auto max-w-6xl my-12 space-y-6 px-12">
       <img src={logo} alt="NLW Experts" />
 
       <form className="w-full">
@@ -17,12 +17,10 @@ export function App() {
 
       <div className="h-px bg-slate-700" />
 
-      <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
+      <div className="grid grid-cols-custom-notes gridcols gap-6 auto-rows-[250px]">
         <NewNoteCard />
 
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
+        <NoteCard note={{ date: new Date(), content: "Hello World" }} />
       </div>
     </div>
   );
