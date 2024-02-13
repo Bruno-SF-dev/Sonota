@@ -3,25 +3,85 @@ import { X } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
 
-export function NewNoteCard() {
+let speechRecognition: SpeechRecognition | null = null;
+
+interface NewNoteCardProps {
+  onNoteCreated: (content: string) => void;
+}
+
+export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [shouldShowOnboarding, setShouldShowOnboarding] = useState(true);
   const [noteContent, setNoteContent] = useState("");
+  const [isRecording, setIsRecording] = useState(false);
 
-  const handleToggleEditor = () => {
-    setShouldShowOnboarding((prev) => !prev);
+  const handleOpenEditor = () => {
+    setShouldShowOnboarding(false);
+  };
+
+  const handleCloseEditor = () => {
+    setShouldShowOnboarding(true);
   };
 
   const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNoteContent(e.target.value);
   };
 
-  function handleSaveNote(e: FormEvent) {
+  const handleSaveNote = (e: FormEvent) => {
     e.preventDefault();
 
-    toast.success("Nota criada com sucesso!");
+    if (!noteContent.trim()) {
+      return;
+    }
 
+    onNoteCreated(noteContent);
+    toast.success("Nota criada com sucesso!");
     setNoteContent("");
-  }
+    handleCloseEditor();
+  };
+
+  const handleStartRecording = () => {
+    // A API de recomhecimento de fala está disponível no navegador?
+    const isSpeechRecognitionAPIAvailable =
+      "SpeechRecognition" in window || "webkitSpeechRecognition";
+
+    if (!isSpeechRecognitionAPIAvailable) {
+      toast.error("Infelizmente seu navegador não suporta gravação.");
+      return;
+    }
+
+    setIsRecording(true);
+    handleOpenEditor();
+
+    const SpeechRecognitionAPI =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    speechRecognition = new SpeechRecognitionAPI();
+
+    speechRecognition.lang = "pt-BR";
+    speechRecognition.continuous = true;
+    speechRecognition.maxAlternatives = 1;
+    speechRecognition.interimResults = true;
+
+    speechRecognition.onresult = (e) => {
+      const transcription = Array.from(e.results).reduce((text, itemResult) => {
+        return text.concat(itemResult[0].transcript);
+      }, "");
+
+      setNoteContent(transcription);
+    };
+
+    speechRecognition.onerror = (e) => {
+      console.error(e);
+    };
+
+    speechRecognition.start();
+  };
+
+  const handleStopRecording = () => {
+    setIsRecording(false);
+
+    speechRecognition?.stop();
+  };
 
   return (
     <Dialog.Root>
@@ -40,18 +100,18 @@ export function NewNoteCard() {
       <Dialog.Portal>
         <Dialog.Overlay className="inset-0 fixed bg-black/60" />
         <Dialog.Content asChild>
-          <div className="z-10 fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[60vh] px-12 flex flex-col items-center">
-            <div className="relative flex-1 w-full max-w-[640px] bg-slate-700 rounded-md flex flex-col overflow-hidden">
+          <div className="z-10 fixed inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:h-[60vh] md:px-12 flex flex-col items-center">
+            <div className="relative flex-1 w-full md:max-w-[640px] bg-slate-700 md:rounded-md flex flex-col overflow-hidden">
               <Dialog.Close asChild>
                 <button
-                  onClick={handleToggleEditor}
+                  onClick={handleCloseEditor}
                   className="absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100 outline-none"
                 >
                   <X className="size-5" />
                 </button>
               </Dialog.Close>
 
-              <form onSubmit={handleSaveNote} className="flex flex-1 flex-col">
+              <form className="flex flex-1 flex-col">
                 <div className="flex flex-1 flex-col gap-3 p-5">
                   <span className="text-sm font-extrabold text-slate-300">
                     Adicionar nota
@@ -60,13 +120,18 @@ export function NewNoteCard() {
                   {shouldShowOnboarding ? (
                     <p className="text-sm leading-6 text-slate-400">
                       Comece{" "}
-                      <button className="font-medium text-lime-400 hover:underline">
+                      <button
+                        className="font-medium text-lime-400 hover:underline"
+                        type="button"
+                        onClick={handleStartRecording}
+                      >
                         gravando uma nota
                       </button>{" "}
                       em áudio ou se preferir{" "}
                       <button
                         className="font-medium text-lime-400 hover:underline"
-                        onClick={handleToggleEditor}
+                        type="button"
+                        onClick={handleOpenEditor}
                       >
                         utilize apenas texto
                       </button>
@@ -82,12 +147,24 @@ export function NewNoteCard() {
                   )}
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full bg-lime-400 py-4 text-center text-sm text-lime-950 font-medium outline-none group hover:bg-lime-500"
-                >
-                  Salvar nota
-                </button>
+                {isRecording ? (
+                  <button
+                    className="w-full flex items-center justify-center gap-2 bg-slate-900 py-4 text-center text-sm text-slate-300 font-medium outline-none group hover:text-slate-100"
+                    type="button"
+                    onClick={handleStopRecording}
+                  >
+                    <div className="size-3 rounded-full bg-red-500 animate-pulse" />
+                    Gravando! (clique p/ interromper)
+                  </button>
+                ) : (
+                  <button
+                    className="w-full bg-lime-400 py-4 text-center text-sm text-lime-950 font-medium outline-none group hover:bg-lime-500"
+                    type="button"
+                    onClick={handleSaveNote}
+                  >
+                    Salvar nota
+                  </button>
+                )}
               </form>
             </div>
           </div>
