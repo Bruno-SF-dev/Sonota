@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClientProvider } from "react-query";
+import { RouterProvider } from "react-router-dom";
 import { Toaster } from "sonner";
-import { App } from "./app";
 import "./index.css";
+import { queryClient } from "./lib/query-client";
+import { router } from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
     <Toaster richColors />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
