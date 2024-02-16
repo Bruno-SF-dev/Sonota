@@ -1,3 +1,5 @@
+import { INote } from "../types/note-type";
+
 interface IGetAllNotes {
   search: string | null;
 }
@@ -5,7 +7,7 @@ interface IGetAllNotes {
 export const getAllNotes = async ({ search }: IGetAllNotes) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  let notes = [
+  let notes: INote[] = [
     {
       id: crypto.randomUUID(),
       date: new Date(),

@@ -36,7 +36,6 @@ export const useNewNote = () => {
 
   const handleCreateNote = hookFormSubmit(async ({ textContent }) => {
     try {
-      console.log("textContent", textContent);
       await createNoteFn({ textContent });
 
       toast.success("Nota criada!");

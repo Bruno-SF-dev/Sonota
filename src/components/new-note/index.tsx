@@ -14,7 +14,10 @@ export function NewNoteCard() {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="absolute bottom-8 right-8 z-5 text-left flex flex-col bg-violet-900 p-5 rounded-full text-slate-300 outline-none hover:ring-1 hover:ring-violet-900 focus-visible:ring-2 focus-visible:ring-violet-900">
+        <button
+          data-testid="trigger-new-note-modal"
+          className="absolute bottom-8 right-8 z-5 text-left flex flex-col bg-violet-900 p-5 rounded-full text-slate-300 outline-none hover:ring-1 hover:ring-violet-900 focus-visible:ring-2 focus-visible:ring-violet-900"
+        >
           <Plus />
         </button>
       </Dialog.Trigger>

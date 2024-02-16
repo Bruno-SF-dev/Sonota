@@ -8,15 +8,23 @@ interface INoteCardProps {
   note: INote;
 }
 
-export function NoteCard({ note: { content, date } }: INoteCardProps) {
+export function NoteCard({ note: { id, date, content } }: INoteCardProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button className="rounded-md text-left flex flex-col bg-slate-300 p-5 gap-y-3 overflow-hidden relative outline-none hover:ring-1 hover:ring-violet-400 focus-visible:ring-2 focus-visible:ring-violet-900">
-          <span className="text-sm font-medium text-slate-800">
+          <span
+            data-testid="note-card-date"
+            className="text-sm font-medium text-slate-800"
+          >
             {formatDistanceToNow(date, { locale: ptBR, addSuffix: true })}
           </span>
-          <p className="text-sm leading-6 text-slate-500">{content}</p>
+          <p
+            data-testid={`note-card-content-${id}`}
+            className="text-sm leading-6 text-slate-500"
+          >
+            {content}
+          </p>
 
           <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/5 to-black/0 pointer-events-none" />
         </button>
@@ -33,11 +41,19 @@ export function NoteCard({ note: { content, date } }: INoteCardProps) {
             </Dialog.Close>
 
             <div className="flex flex-1 flex-col gap-8 p-5">
-              <span className="text-base font-extrabold">
+              <span
+                data-testid="note-modal-date"
+                className="text-base font-extrabold"
+              >
                 {formatDistanceToNow(date, { locale: ptBR, addSuffix: true })}
               </span>
 
-              <p className="text-base leading-6 text-slate-600">{content}</p>
+              <p
+                data-testid="note-modal-content"
+                className="text-base leading-6 text-slate-600"
+              >
+                {content}
+              </p>
             </div>
           </div>
         </Dialog.Content>

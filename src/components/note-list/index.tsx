@@ -24,7 +24,10 @@ export const NoteList = () => {
   return (
     <>
       {!!isLoading ? (
-        <div className="flex flex-1 justify-center pt-[264px]">
+        <div
+          data-testid="note-list-loader"
+          className="flex flex-1 justify-center pt-[264px]"
+        >
           <div className="border-4 border-l-transparent  border-violet-400 border-solid size-12 rounded-full animate-spin duration-100"></div>
         </div>
       ) : (
