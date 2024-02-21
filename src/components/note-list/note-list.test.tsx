@@ -5,9 +5,39 @@ import * as actions from "../../data/notes";
 import * as useNoteList from "../../hooks/notes-hook/use-note-list";
 import { customRender } from "../../tests/custom-render";
 import { INote } from "../../types/note-type";
+import { generateUUID } from "../../utils/uuid-generate";
 
-describe("NoteList Component", () => {
-  test("Render note list", () => {
+jest.mock("../../utils/uuid-generate", () => {
+  return {
+    generateUUID: jest.fn(),
+  };
+});
+
+describe("Componente: NoteList", () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test("Renderizar o Loader quando isLoading true", () => {
+    const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
+
+    const id1 = faker.string.uuid();
+    const content1 = faker.lorem.text();
+
+    const notes: INote[] = [{ id: id1, date: new Date(), content: content1 }];
+
+    useNoteListSpy.mockReturnValueOnce({ notes, isLoading: true });
+
+    customRender(<NoteList />);
+
+    const noteListLoader = screen.queryByTestId("note-list-loader");
+    const noteCardContent1 = screen.queryByTestId(`note-card-content-${id1}`);
+
+    expect(noteListLoader).toBeInTheDocument();
+    expect(noteCardContent1).toBeNull();
+  });
+
+  test("Renderizar a lista quando isLoading false", () => {
     const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
 
     const id1 = faker.string.uuid();
@@ -32,81 +62,52 @@ describe("NoteList Component", () => {
     expect(note2CardContent?.textContent).toEqual(content2);
   });
 
-  test("Render note list loader", () => {
-    const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
-
-    const id1 = faker.string.uuid();
-    const content1 = faker.lorem.text();
-
-    const notes: INote[] = [{ id: id1, date: new Date(), content: content1 }];
-
-    useNoteListSpy.mockReturnValueOnce({ notes, isLoading: true });
-
-    customRender(<NoteList />);
-
-    const noteListLoader = screen.queryByTestId("note-list-loader");
-    const noteCardContent1 = screen.queryByTestId(`note-card-content-${id1}`);
-
-    expect(noteListLoader).toBeInTheDocument();
-    expect(noteCardContent1).toBeNull();
-  });
-
-  test("Render note list, mock getAllNotes", async () => {
+  test("Renderizar primeiro o Loader e, depois que o MOCK do get for feito, a lista de notas.", async () => {
     const id1 = faker.string.uuid();
     const content1 = faker.lorem.text();
 
     const notes: INote[] = [{ id: id1, date: new Date(), content: content1 }];
 
     jest.spyOn(actions, "getAllNotes").mockImplementation(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       return notes;
     });
 
-    const { debug } = customRender(<NoteList />);
-    debug();
+    customRender(<NoteList />);
 
-    // Se continua em tela, o teste falha aqui
-    // aqui falha pq o tempo não é suficiente pra Promise do getAllNote ser resolvida
-    // então o loader continua na tela
-    // await waitFor(
-    //   () => {
-    //     expect(
-    //       screen.queryByTestId(`note-list-loader`)
-    //     ).not.toBeInTheDocument();
-    //   },
-    //   { timeout: 1000 }
-    // );
+    expect(screen.queryByTestId(`note-list-loader`)).toBeInTheDocument();
 
-    // Nesse caso, se o waitFor retorna true permitindo que o loader esteja em tela,
-    // o teste continua e falha ao tentar encontrar o conteúdo de note
-    // A função callback do waitFor é executada em loop até timeout ser atingido
-    // ou enquanto o expect que tá dentro do callback não passa
-    // await waitFor(
-    //   () => {
-    //     expect(screen.queryByTestId(`note-list-loader`)).toBeInTheDocument();
-    //   },
-    //   { timeout: 1000 }
-    // );
+    await waitFor(() => {
+      expect(screen.queryByTestId(`note-list-loader`)).not.toBeInTheDocument();
+    });
 
-    // Se sai da tela, o teste continua, e o waitFor retorna true
-    // Aqui, o timeout é suficiente pra getAllNotes ser resolvida, então o loader sai da tela
-    // e o waitFor retorna true
-    // A função callback do waitFor é executada em loop até timeout ser atingido,
-    // ou enquanto o expect que tá dentro do callback não passa
+    expect(
+      screen.queryByTestId(`note-card-content-${id1}`)?.textContent
+    ).toEqual(content1);
+  });
+
+  // Talvez não seja necessário, mas ficou para o aprendizado.
+  test("Renderizar primeiro o Loader e, depois que o get original for feito, a lista de notas.", async () => {
+    (generateUUID as jest.Mock)
+      .mockReturnValueOnce("abc-1")
+      .mockReturnValueOnce("abc-2")
+      .mockReturnValueOnce("abc-3");
+
+    customRender(<NoteList />);
+
+    expect(screen.queryByTestId(`note-list-loader`)).toBeInTheDocument();
+
     await waitFor(
       () => {
         expect(
           screen.queryByTestId(`note-list-loader`)
         ).not.toBeInTheDocument();
       },
-      { timeout: 2000 }
+      { timeout: 3000 }
     );
-
-    debug();
-
     expect(
-      screen.queryByTestId(`note-card-content-${id1}`)?.textContent
-    ).toEqual(content1);
+      screen.queryByTestId(`note-card-content-abc-1`)?.textContent
+    ).toEqual("Nota 01");
   });
 });

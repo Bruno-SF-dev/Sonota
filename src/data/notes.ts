@@ -1,4 +1,5 @@
 import { INote } from "../types/note-type";
+import { generateUUID } from "../utils/uuid-generate";
 
 interface IGetAllNotes {
   search: string | null;
@@ -9,17 +10,17 @@ export const getAllNotes = async ({ search }: IGetAllNotes) => {
 
   let notes: INote[] = [
     {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       date: new Date(),
       content: "Nota 01",
     },
     {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       date: new Date(),
       content: "Nota 02",
     },
     {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       date: new Date(),
       content: "Nota 03",
     },

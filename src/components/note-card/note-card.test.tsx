@@ -9,8 +9,8 @@ jest.mock("date-fns", () => ({
   formatDistanceToNow: jest.fn(),
 }));
 
-describe("NoteCard Component", () => {
-  test("Render the properties of a note", () => {
+describe("Componente: NoteCard", () => {
+  test("Renderizar as informações da nota corretamente", () => {
     const id = faker.string.uuid();
     const date = faker.date.anytime();
     const content = faker.lorem.text();
