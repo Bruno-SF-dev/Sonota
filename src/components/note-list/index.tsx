@@ -1,6 +1,6 @@
+import { useNoteList } from "../../hooks/notes-hook/use-note-list";
 import { NewNoteCard } from "../new-note";
 import { NoteCard } from "../note-card";
-import { useNoteList } from "./use-note-list";
 
 export const NoteList = () => {
   const { notes, isLoading } = useNoteList();

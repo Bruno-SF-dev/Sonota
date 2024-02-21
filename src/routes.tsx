@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Notes } from "./pages/notes";
+import { CustomComponent } from "./components/custom-component";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Notes />,
+    element: <CustomComponent />,
   },
 ]);

@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import logo from "../../assets/logo-nlw-experts.svg";
-import { useNoteSearch } from "./use-note-search";
+import { useNoteSearch } from "./hooks/use-note-search";
 
 export const NoteSearch = () => {
   const { handleFilter, register } = useNoteSearch();

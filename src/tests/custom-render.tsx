@@ -33,5 +33,5 @@ export const customRender = (
   ui: React.ReactNode,
   options?: Omit<RenderOptions, "wrapper">
 ) => {
-  render(ui, { wrapper: CustomRenderProvider, ...options });
+  return render(ui, { wrapper: CustomRenderProvider, ...options });
 };
