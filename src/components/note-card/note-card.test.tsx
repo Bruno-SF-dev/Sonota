@@ -49,13 +49,11 @@ describe("Componente: NoteCard", () => {
 
     (formatDate as jest.Mock).mockReturnValue("10/02/2024");
 
-    const { debug } = render(<NoteCard note={note} />);
-    debug();
+    render(<NoteCard note={note} />);
 
     const noteCard = screen.getByTestId("trigger-view-note-modal");
 
     fireEvent.click(noteCard);
-    debug();
 
     const noteModalDate = await screen.findByTestId("note-modal-date");
     const noteModalContent = await screen.findByTestId(
@@ -67,5 +65,38 @@ describe("Componente: NoteCard", () => {
     expect(noteModalDate?.textContent).toEqual("10/02/2024");
     expect(noteModalContent?.textContent).toEqual(content);
     expect(noteModalTitle?.textContent).toEqual(title);
+  });
+
+  test("Ao clicar no card, abrir o modal e, ao clicar no botão de fechar o modal, fechá-lo.", async () => {
+    const id = faker.string.uuid();
+    const date = faker.date.anytime();
+    const title = faker.lorem.word();
+    const content = faker.lorem.text();
+
+    const note: INote = {
+      id,
+      date,
+      title,
+      content,
+    };
+
+    formatDate as jest.Mock;
+
+    render(<NoteCard note={note} />);
+
+    const noteCard = screen.getByTestId("trigger-view-note-modal");
+
+    fireEvent.click(noteCard);
+
+    await screen.findByTestId(`note-modal-title-${id}`);
+    const btnCloseViewModal = await screen.findByTestId("close-view-modal");
+
+    expect(screen.queryByTestId(`note-modal-title-${id}`)).toBeInTheDocument();
+
+    fireEvent.click(btnCloseViewModal);
+
+    expect(
+      screen.queryByTestId(`note-modal-title-${id}`)
+    ).not.toBeInTheDocument();
   });
 });

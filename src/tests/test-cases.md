@@ -11,7 +11,7 @@
 
 - [x] Exibir as informações da nota corretamente.
 - [x] Clicar no card e abrir o modal com as informações da nota.
-- [ ] Clicar no card, abrir o modal com as informações da nota e fechá-lo.
+- [x] Ao clicar no card, abrir o modal e, ao clicar no botão de fechar o modal, fechá-lo.
 
 ##### Componente para criar Nota: NewNote
 
