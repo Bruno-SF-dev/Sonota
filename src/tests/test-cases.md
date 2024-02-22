@@ -4,7 +4,7 @@
 
 - [x] Exibir o Loader quando os dados estiverem sendo carregados.
 - [x] Exibir a Lista de Notas quando os dados estiverem carregados e houver notas para exibir.
-- [ ] Exibir a mensagem informando que não há notas quando os dados estiverem carregados e não houver notas para exibir.
+- [x] Exibir a mensagem informando que não há notas e botão de criar quando os dados estiverem carregados e não houver notas para exibir.
 - [x] Exibir o Loader e, depois que os dados estiverem carregados, a Lista de Notas.
 
 ##### Componente de Nota: NoteCard

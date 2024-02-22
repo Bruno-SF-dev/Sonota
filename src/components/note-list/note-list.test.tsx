@@ -66,6 +66,23 @@ describe("Componente: NoteList", () => {
     expect(note2CardContent?.textContent).toEqual(content2);
   });
 
+  test("Renderizar a mensagem informando que não há notas e botão de criar quando não houver", () => {
+    const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
+
+    const notes: INote[] = [];
+
+    useNoteListSpy.mockReturnValueOnce({ notes, isLoading: false });
+
+    const { debug } = customRender(<NoteList />);
+    debug();
+
+    const message = screen.queryByText("Crie suas anotações aqui");
+    const btnCreate = screen.queryByTestId("trigger-new-note-modal");
+
+    expect(message).toBeInTheDocument();
+    expect(btnCreate).toBeInTheDocument();
+  });
+
   test("Renderizar primeiro o Loader e, depois que o MOCK do get for feito, a lista de notas.", async () => {
     const id1 = faker.string.uuid();
     const title1 = faker.lorem.word();
