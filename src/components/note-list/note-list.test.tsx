@@ -73,8 +73,7 @@ describe("Componente: NoteList", () => {
 
     useNoteListSpy.mockReturnValueOnce({ notes, isLoading: false });
 
-    const { debug } = customRender(<NoteList />);
-    debug();
+    customRender(<NoteList />);
 
     const message = screen.queryByText("Crie suas anotações aqui");
     const btnCreate = screen.queryByTestId("trigger-new-note-modal");
