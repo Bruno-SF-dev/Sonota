@@ -10,7 +10,7 @@
 ##### Componente de Nota: NoteCard
 
 - [x] Exibir as informações da nota corretamente.
-- [ ] Clicar no card e abrir o modal com as informações da nota.
+- [x] Clicar no card e abrir o modal com as informações da nota.
 - [ ] Clicar no card, abrir o modal com as informações da nota e fechá-lo.
 
 ##### Componente para criar Nota: NewNote

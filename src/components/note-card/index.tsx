@@ -13,7 +13,10 @@ export function NoteCard({
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="rounded-md text-left flex flex-col bg-neutral-950/90 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-green-default transition hover:scale-105">
+        <button
+          data-testid="trigger-view-note-modal"
+          className="rounded-md text-left flex flex-col bg-neutral-950/90 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-green-default transition hover:scale-105"
+        >
           <div className="flex flex-1 flex-col gap-3 w-full px-5 pt-3 overflow-hidden relative">
             <span
               data-testid="note-card-date"
@@ -60,14 +63,14 @@ export function NoteCard({
               </span>
 
               <span
-                data-testid="note-modal-content"
+                data-testid={`note-modal-title-${id}`}
                 className="text-lg font-semibold text-slate-300"
               >
                 {title}
               </span>
 
               <p
-                data-testid="note-modal-content"
+                data-testid={`note-modal-content-${id}`}
                 className="text-base leading-6 text-slate-200"
               >
                 {content}
