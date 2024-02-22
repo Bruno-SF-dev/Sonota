@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { formatDate } from "date-fns/format";
 import { NoteCard } from ".";
 import { INote } from "../../types/note-type";
@@ -53,7 +54,7 @@ describe("Componente: NoteCard", () => {
 
     const noteCard = screen.getByTestId("trigger-view-note-modal");
 
-    fireEvent.click(noteCard);
+    await userEvent.click(noteCard);
 
     const noteModalDate = await screen.findByTestId("note-modal-date");
     const noteModalContent = await screen.findByTestId(
@@ -86,14 +87,16 @@ describe("Componente: NoteCard", () => {
 
     const noteCard = screen.getByTestId("trigger-view-note-modal");
 
-    fireEvent.click(noteCard);
+    await userEvent.click(noteCard);
 
     await screen.findByTestId(`note-modal-title-${id}`);
-    const btnCloseViewModal = await screen.findByTestId("close-view-modal");
+    const btnCloseViewModal = await screen.findByTestId(
+      "close-view-note-modal"
+    );
 
     expect(screen.queryByTestId(`note-modal-title-${id}`)).toBeInTheDocument();
 
-    fireEvent.click(btnCloseViewModal);
+    await userEvent.click(btnCloseViewModal);
 
     expect(
       screen.queryByTestId(`note-modal-title-${id}`)

@@ -50,7 +50,7 @@ export function NoteCard({
           <div className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-950 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <Dialog.Close asChild>
               <button
-                data-testid="close-view-modal"
+                data-testid="close-view-note-modal"
                 className="absolute right-0 top-0 bg-neutral-800 p-1.5 hover:text-slate-400 outline-none"
               >
                 <X className="size-5" />
