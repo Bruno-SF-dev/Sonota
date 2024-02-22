@@ -6,7 +6,9 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
-
+      colors: {
+        "green-default": "#10C49F",
+      },
       gridTemplateColumns: {
         "custom-notes": "repeat(auto-fit, minmax(280px, 1fr))",
       },

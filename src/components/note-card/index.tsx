@@ -1,6 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale/pt-BR";
+import { formatDate } from "date-fns/format";
 import { X } from "lucide-react";
 import { INote } from "../../types/note-type";
 
@@ -14,13 +13,13 @@ export function NoteCard({
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="rounded-md text-left flex flex-col bg-neutral-900/60 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-[#10C49F] transition hover:scale-105">
-          <div className="flex flex-1 flex-col gap-2 w-full px-5 pt-5 overflow-hidden relative">
+        <button className="rounded-md text-left flex flex-col bg-neutral-950/90 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-green-default transition hover:scale-105">
+          <div className="flex flex-1 flex-col gap-3 w-full px-5 pt-3 overflow-hidden relative">
             <span
               data-testid="note-card-date"
-              className="text-sm font-medium text-slate-300"
+              className="text-xs font-medium text-slate-300/50 ml-auto"
             >
-              {formatDistanceToNow(date, { locale: ptBR, addSuffix: true })}
+              {formatDate(date, "dd/MM/yyyy")}
             </span>
 
             <p
@@ -30,7 +29,7 @@ export function NoteCard({
               {content}
             </p>
 
-            <div className="absolute left-0 right-0 bottom-0 flex items-center h-1/4 bg-gradient-to-t from-neutral-900 to-black/0" />
+            <div className="absolute left-0 right-0 bottom-0 flex items-center h-1/4 bg-gradient-to-t from-neutral-950/90 to-black/0" />
           </div>
 
           <div
@@ -45,7 +44,7 @@ export function NoteCard({
       <Dialog.Portal>
         <Dialog.Overlay className="inset-0 fixed bg-black/60 backdrop-blur-[4px]" />
         <Dialog.Content asChild>
-          <div className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-900 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+          <div className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-950 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <Dialog.Close asChild>
               <button className="absolute right-0 top-0 bg-neutral-800 p-1.5 hover:text-slate-400 outline-none">
                 <X className="size-5" />
@@ -57,7 +56,7 @@ export function NoteCard({
                 data-testid="note-modal-date"
                 className="text-base font-extrabold text-slate-300"
               >
-                {formatDistanceToNow(date, { locale: ptBR, addSuffix: true })}
+                {formatDate(date, "dd/MM/yyyy")}
               </span>
 
               <span

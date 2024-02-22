@@ -1,12 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { render, screen } from "@testing-library/react";
-import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale/pt-BR";
+import { formatDate } from "date-fns/format";
 import { NoteCard } from ".";
 import { INote } from "../../types/note-type";
 
-jest.mock("date-fns", () => ({
-  formatDistanceToNow: jest.fn(),
+jest.mock("date-fns/format", () => ({
+  formatDate: jest.fn(),
 }));
 
 describe("Componente: NoteCard", () => {
@@ -23,18 +22,15 @@ describe("Componente: NoteCard", () => {
       content,
     };
 
-    (formatDistanceToNow as jest.Mock).mockReturnValue("3 dias antes");
+    (formatDate as jest.Mock).mockReturnValue("10/02/2024");
 
     render(<NoteCard note={note} />, {});
 
     const noteCardDate = screen.queryByTestId("note-card-date");
     const noteCardContent = screen.queryByTestId(`note-card-content-${id}`);
 
-    expect(formatDistanceToNow).toHaveBeenCalledWith(date, {
-      locale: ptBR,
-      addSuffix: true,
-    });
-    expect(noteCardDate?.textContent).toEqual("3 dias antes");
+    expect(formatDate).toHaveBeenCalledWith(date, "dd/MM/yyyy");
+    expect(noteCardDate?.textContent).toEqual("10/02/2024");
     expect(noteCardContent?.textContent).toEqual(content);
   });
 });

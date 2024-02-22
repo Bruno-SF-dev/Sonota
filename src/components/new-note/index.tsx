@@ -16,16 +16,16 @@ export function NewNoteCard() {
       <Dialog.Trigger asChild>
         <button
           data-testid="trigger-new-note-modal"
-          className="fixed bottom-8 right-8 md:right-[264px] z-5 text-left flex flex-col bg-[#10C49F] p-5 rounded-full text-neutral-900 outline-none hover:ring-1 hover:ring-[#10C49F] focus-visible:ring-2 focus-visible:ring-[#10C49F]"
+          className="bg-green-default p-5 rounded-full text-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-slate-200 transition hover:scale-105"
         >
           <Plus />
         </button>
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Overlay className="inset-0 fixed bg-black/60 backdrop-blur-[4px]" />
+        <Dialog.Overlay className="inset-0 fixed bg-black/70 backdrop-blur-[4px]" />
         <Dialog.Content asChild>
-          <div className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-900 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+          <div className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-950 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
             <Dialog.Close asChild>
               <button className="absolute right-0 top-0  bg-neutral-800 p-1.5 hover:text-slate-400 outline-none">
                 <X className="size-5" />
@@ -52,9 +52,9 @@ export function NewNoteCard() {
                 ></textarea>
               </div>
 
-              <div className="flex justify-center gap-2 p-4 bg-black">
+              <div className="flex justify-center gap-2 p-4 bg-black/40">
                 <button
-                  className="flex items-center justify-center gap-2 bg-[#10C49F] p-4 rounded-full text-neutral-900 font-medium outline-none hover:bg-[#10C49F]"
+                  className="flex items-center justify-center gap-2 bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:scale-105"
                   type="button"
                   onClick={
                     isRecording ? handleStopRecording : handleStartRecording
@@ -70,7 +70,7 @@ export function NewNoteCard() {
                   )}
                 </button>
                 <button
-                  className="bg-[#10C49F] p-4 rounded-full text-neutral-900 font-medium outline-none hover:bg-[#10C49F]"
+                  className="bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:scale-105"
                   type="submit"
                 >
                   <Check />

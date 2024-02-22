@@ -7,17 +7,25 @@ export const NoteList = () => {
 
   const renderNotes = () => {
     return (
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[180px]">
+      <>
         {!!notes?.length ? (
-          notes?.map((note) => <NoteCard note={note} key={note.id} />)
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[180px]">
+            {notes?.map((note) => (
+              <NoteCard note={note} key={note.id} />
+            ))}
+
+            <div className="fixed bottom-8 right-8 md:right-[264px] z-5">
+              <NewNoteCard />
+            </div>
+          </div>
         ) : (
-          <div className="flex items-center justify-center bg-slate-300/25 rounded-2xl">
-            <p className="text-2xl text-violet-500">
-              Crie suas anotações clicando ali no +
-            </p>
+          <div className="flex-1 flex flex-col gap-4 items-center justify-center rounded-2xl">
+            <p className="text-2xl text-slate-300">Crie suas anotações aqui</p>
+
+            <NewNoteCard />
           </div>
         )}
-      </div>
+      </>
     );
   };
 
@@ -28,12 +36,11 @@ export const NoteList = () => {
           data-testid="note-list-loader"
           className="flex flex-1 justify-center pt-[264px]"
         >
-          <div className="border-4 border-l-transparent  border-[#10C49F] border-solid size-12 rounded-full animate-spin duration-100"></div>
+          <div className="border-4 border-l-transparent  border-green-default border-solid size-12 rounded-full animate-spin duration-100"></div>
         </div>
       ) : (
         renderNotes()
       )}
-      <NewNoteCard />
     </>
   );
 };
