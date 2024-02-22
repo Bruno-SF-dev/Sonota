@@ -7,7 +7,7 @@ export const NoteList = () => {
 
   const renderNotes = () => {
     return (
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[250px]">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[180px]">
         {!!notes?.length ? (
           notes?.map((note) => <NoteCard note={note} key={note.id} />)
         ) : (
@@ -28,7 +28,7 @@ export const NoteList = () => {
           data-testid="note-list-loader"
           className="flex flex-1 justify-center pt-[264px]"
         >
-          <div className="border-4 border-l-transparent  border-violet-400 border-solid size-12 rounded-full animate-spin duration-100"></div>
+          <div className="border-4 border-l-transparent  border-[#10C49F] border-solid size-12 rounded-full animate-spin duration-100"></div>
         </div>
       ) : (
         renderNotes()

@@ -8,6 +8,7 @@ import { useNoteActions } from "../../../hooks/notes-hook/use-note-actions";
 import { useRecordingHook } from "./use-note-recording";
 
 const createNoteSchema = z.object({
+  title: z.string(),
   textContent: z.string(),
 });
 
@@ -34,12 +35,13 @@ export const useNewNote = () => {
     setValue("textContent", transcription);
   }, [transcription]);
 
-  const handleCreateNote = hookFormSubmit(async ({ textContent }) => {
+  const handleCreateNote = hookFormSubmit(async ({ textContent, title }) => {
     try {
-      await createNoteFn({ textContent });
+      await createNoteFn({ textContent, title });
 
       toast.success("Nota criada!");
       resetField("textContent");
+      resetField("title");
     } catch (error) {}
   });
 

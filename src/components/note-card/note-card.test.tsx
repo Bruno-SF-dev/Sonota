@@ -13,11 +13,13 @@ describe("Componente: NoteCard", () => {
   test("Renderizar as informações da nota corretamente", () => {
     const id = faker.string.uuid();
     const date = faker.date.anytime();
+    const title = faker.lorem.word();
     const content = faker.lorem.text();
 
     const note: INote = {
       id,
       date,
+      title,
       content,
     };
 
