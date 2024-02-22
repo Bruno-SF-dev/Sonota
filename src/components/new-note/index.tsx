@@ -25,9 +25,15 @@ export function NewNoteCard() {
       <Dialog.Portal>
         <Dialog.Overlay className="inset-0 fixed bg-black/70 backdrop-blur-[4px]" />
         <Dialog.Content asChild>
-          <div className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-950 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+          <div
+            data-testid="new-note-modal"
+            className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-950 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+          >
             <Dialog.Close asChild>
-              <button className="absolute right-0 top-0  bg-neutral-800 p-1.5 hover:text-slate-400 outline-none">
+              <button
+                data-testid="close-new-note-modal"
+                className="absolute right-0 top-0  bg-neutral-800 p-1.5 hover:text-slate-400 outline-none"
+              >
                 <X className="size-5" />
               </button>
             </Dialog.Close>
@@ -39,6 +45,7 @@ export function NewNoteCard() {
                 </span>
 
                 <input
+                  data-testid="title-field"
                   autoFocus
                   placeholder="Título da nota..."
                   className="text-lg font-bold leading-6 text-slate-200 bg-transparent placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
@@ -46,6 +53,7 @@ export function NewNoteCard() {
                 />
 
                 <textarea
+                  data-testid="content-field"
                   className="text-base leading-6 text-slate-200 bg-transparent resize-none flex-1 placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
                   placeholder="Digite ou fale o que deseja anotar..."
                   {...register("textContent")}
@@ -70,6 +78,7 @@ export function NewNoteCard() {
                   )}
                 </button>
                 <button
+                  data-testid="submit-create"
                   className="bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:scale-105"
                   type="submit"
                 >

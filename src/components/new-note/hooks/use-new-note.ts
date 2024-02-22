@@ -35,7 +35,7 @@ export const useNewNote = () => {
     setValue("textContent", transcription);
   }, [transcription]);
 
-  const handleCreateNote = hookFormSubmit(async ({ textContent, title }) => {
+  const handleCreateNote = hookFormSubmit(async ({ title, textContent }) => {
     try {
       await createNoteFn({ textContent, title });
 

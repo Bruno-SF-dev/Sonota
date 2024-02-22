@@ -6,6 +6,7 @@
 - [x] Exibir a Lista de Notas quando os dados estiverem carregados e houver notas para exibir.
 - [x] Exibir a mensagem informando que não há notas e botão de criar quando os dados estiverem carregados e não houver notas para exibir.
 - [x] Exibir o Loader e, depois que os dados estiverem carregados, a Lista de Notas.
+- [ ] Digitar na textarea, clicar no botão para criar a nota e ver se a nova nota é renderizada na listagem.
 
 ##### Componente de Nota: NoteCard
 
@@ -15,7 +16,8 @@
 
 ##### Componente para criar Nota: NewNote
 
-- [ ] Digitar na textarea, clicar no botão para criar a nota e ver se a nova nota é renderizada na listagem.
+- [x] Renderizar o botão de criar nova nota, clicar nele, abrir o modal e clicar para fechar o modal.
+- [x] Digitar na textarea, clicar no botão para criar a nota e ver se a função de create é chamada com os parâmetros corretos.
 
 ##### Componente de busca: NoteSearch
 
