@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { screen, waitFor } from "@testing-library/react";
 import { NoteList } from ".";
-import * as actions from "../../data/notes";
+import * as api from "../../data/notes";
 import * as useNoteList from "../../hooks/notes-hook/use-note-list";
 import { customRender } from "../../tests/custom-render";
 import { INote } from "../../types/note-type";
@@ -91,7 +91,7 @@ describe("Componente: NoteList", () => {
       { id: id1, date: new Date(), title: title1, content: content1 },
     ];
 
-    jest.spyOn(actions, "getAllNotes").mockImplementation(async () => {
+    jest.spyOn(api, "getAllNotes").mockImplementation(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       return notes;

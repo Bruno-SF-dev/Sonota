@@ -6,8 +6,8 @@
 - [x] Exibir a Lista de Notas quando os dados estiverem carregados e houver notas para exibir.
 - [x] Exibir a mensagem informando que não há notas e botão de criar quando os dados estiverem carregados e não houver notas para exibir.
 - [x] Exibir o Loader e, depois que os dados estiverem carregados, a Lista de Notas.
+- [ ] Filtrar nota e ver se apenas ela é renderizada na listagem.
 - [ ] Criar nova nota e ver se ela é renderizada na listagem.
-- [ ] Filtrar nota e ver se ela apenas ela é renderizada na listagem.
 
 ##### Componente de Nota: NoteCard
 

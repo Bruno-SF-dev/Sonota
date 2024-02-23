@@ -1,5 +1,5 @@
-import { NoteList } from "../components/note-list";
-import { NoteSearch } from "../components/search-note";
+import { NoteList } from "../../components/note-list";
+import { NoteSearch } from "../../components/search-note";
 
 export const Notes = () => {
   return (
