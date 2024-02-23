@@ -2,15 +2,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import * as z from "zod";
+import { useSubmitSearchNote } from "./use-submit-search";
 
 const filterSchema = z.object({
   search: z.string(),
 });
 
-type INotesFilter = z.infer<typeof filterSchema>;
+export type INotesFilter = z.infer<typeof filterSchema>;
 
-export const useNoteSearch = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+export const useSearchNote = () => {
+  const [searchParams] = useSearchParams();
 
   const search = searchParams.get("search");
 
@@ -21,20 +22,12 @@ export const useNoteSearch = () => {
     },
   });
 
-  const handleFilter = hookFormSubmit(({ search }) => {
-    setSearchParams((state) => {
-      if (search) {
-        state.set("search", search);
-      } else {
-        state.delete("search");
-      }
+  const { onSubmitSearchNote } = useSubmitSearchNote();
 
-      return state;
-    });
-  });
+  const handleSearchNote = hookFormSubmit(onSubmitSearchNote);
 
   return {
-    handleFilter,
+    handleSearchNote,
     register,
   };
 };

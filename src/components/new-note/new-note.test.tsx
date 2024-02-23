@@ -19,7 +19,7 @@ describe("Componente: NewNote", () => {
     expect(screen.queryByTestId("new-note-modal")).not.toBeInTheDocument();
   });
 
-  test("Digitar na textarea, clicar no botão para criar a nota e ver se a função de create é chamada com os parâmetros corretos.", async () => {
+  test("Preencher os campos, clicar no botão de salvar a nota e ver se a função de create é chamada com os parâmetros corretos.", async () => {
     const createNoteFnMock = jest.fn();
 
     jest.spyOn(useNoteActions, "useNoteActions").mockReturnValue({
@@ -28,7 +28,6 @@ describe("Componente: NewNote", () => {
     });
 
     customRender(<NewNoteCard />);
-
     const btnNewNote = screen.getByTestId("trigger-new-note-modal");
     fireEvent.click(btnNewNote);
 
