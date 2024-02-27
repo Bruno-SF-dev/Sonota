@@ -1,112 +1,66 @@
-import { faker } from "@faker-js/faker";
 import { screen, waitFor } from "@testing-library/react";
 import { NoteList } from ".";
 import * as api from "../../data/notes";
 import * as useNoteList from "../../hooks/notes-hook/use-note-list";
 import { customRender } from "../../tests/custom-render";
-import { INote } from "../../types/note-type";
-
-jest.mock("../../utils/uuid-generate", () => {
-  return {
-    generateUUID: jest.fn(),
-  };
-});
+import { mockGetAllNotes, mockNotes } from "../../tests/mocks/get-all-notes";
 
 describe("Componente: NoteList", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
   });
 
-  test("Renderizar o Loader quando isLoading true", () => {
+  test("Exibir o Loader quando os dados estiverem sendo carregados.", () => {
     const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
 
-    const id1 = faker.string.uuid();
-    const title1 = faker.lorem.word();
-    const content1 = faker.lorem.text();
-
-    const notes: INote[] = [
-      { id: id1, date: new Date(), title: title1, content: content1 },
-    ];
-
-    useNoteListSpy.mockReturnValueOnce({ notes, isLoading: true });
+    useNoteListSpy.mockReturnValueOnce({ notes: mockNotes, isLoading: true });
 
     customRender(<NoteList />);
 
     const noteListLoader = screen.queryByTestId("note-list-loader");
-    const noteCardContent1 = screen.queryByTestId(`note-card-content-${id1}`);
 
     expect(noteListLoader).toBeInTheDocument();
-    expect(noteCardContent1).toBeNull();
+    expect(screen.queryAllByTestId(/^note-card-title-/)).toHaveLength(0);
   });
 
-  test("Renderizar a lista quando isLoading false", () => {
+  test("Exibir a Lista de Notas quando não estiver carregando e houver notas para exibir.", () => {
     const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
 
-    const id1 = faker.string.uuid();
-    const title1 = faker.lorem.word();
-    const content1 = faker.lorem.text();
-
-    const id2 = faker.string.uuid();
-    const title2 = faker.lorem.word();
-    const content2 = faker.lorem.text();
-
-    const notes: INote[] = [
-      { id: id1, date: new Date(), title: title1, content: content1 },
-      { id: id2, date: new Date(), title: title2, content: content2 },
-    ];
-
-    useNoteListSpy.mockReturnValueOnce({ notes, isLoading: false });
+    useNoteListSpy.mockReturnValueOnce({ notes: mockNotes, isLoading: false });
 
     customRender(<NoteList />);
 
-    const note1CardContent = screen.queryByTestId(`note-card-content-${id1}`);
-    const note2CardContent = screen.queryByTestId(`note-card-content-${id2}`);
+    const noteListLoader = screen.queryByTestId("note-list-loader");
 
-    expect(note1CardContent?.textContent).toEqual(content1);
-    expect(note2CardContent?.textContent).toEqual(content2);
+    expect(noteListLoader).not.toBeInTheDocument();
+    expect(screen.queryAllByTestId(/^note-card-title-/)).toHaveLength(5);
   });
 
-  test("Renderizar a mensagem informando que não há notas e botão de criar quando não houver", () => {
+  test("Exibir a mensagem informando que não há notas e botão de criar quando não estiver carregando e não houver notas para exibir.", () => {
     const useNoteListSpy = jest.spyOn(useNoteList, "useNoteList");
 
-    const notes: INote[] = [];
-
-    useNoteListSpy.mockReturnValueOnce({ notes, isLoading: false });
+    useNoteListSpy.mockReturnValueOnce({ notes: [], isLoading: false });
 
     customRender(<NoteList />);
 
     const message = screen.queryByText("Crie suas anotações aqui");
-    const btnCreate = screen.queryByTestId("trigger-new-note-modal");
+    const btnCreate = screen.queryByLabelText("Criar nota");
 
     expect(message).toBeInTheDocument();
     expect(btnCreate).toBeInTheDocument();
   });
 
-  test("Renderizar primeiro o Loader e, depois que o MOCK do get for feito, a lista de notas.", async () => {
-    const id1 = faker.string.uuid();
-    const title1 = faker.lorem.word();
-    const content1 = faker.lorem.text();
-
-    const notes: INote[] = [
-      { id: id1, date: new Date(), title: title1, content: content1 },
-    ];
-
-    jest.spyOn(api, "getAllNotes").mockImplementation(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-
-      return notes;
-    });
+  test("Exibir o Loader e, depois que os dados do Mock estiverem carregados, a Lista de Notas.", async () => {
+    jest.spyOn(api, "getAllNotes").mockImplementation(mockGetAllNotes);
 
     customRender(<NoteList />);
 
-    expect(screen.queryByTestId(`note-list-loader`)).toBeInTheDocument();
+    expect(screen.queryByTestId("note-list-loader")).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(screen.queryByTestId(`note-list-loader`)).not.toBeInTheDocument();
+      expect(screen.queryByTestId("note-list-loader")).not.toBeInTheDocument();
     });
 
-    expect(
-      screen.queryByTestId(`note-card-content-${id1}`)?.textContent
-    ).toEqual(content1);
+    expect(screen.queryAllByTestId(/^note-card-title-/)).toHaveLength(5);
   });
 });

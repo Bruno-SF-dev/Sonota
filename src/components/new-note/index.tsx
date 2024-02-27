@@ -15,7 +15,7 @@ export function NewNoteCard() {
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button
-          data-testid="trigger-new-note-modal"
+          aria-label="Criar nota"
           className="bg-green-default p-5 rounded-full text-neutral-900 outline-none focus-visible:ring-2 focus-visible:ring-slate-200 transition hover:scale-105"
         >
           <Plus />
@@ -55,7 +55,7 @@ export function NewNoteCard() {
                 <textarea
                   data-testid="content-field"
                   className="text-base leading-6 text-slate-200 bg-transparent resize-none flex-1 placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
-                  placeholder="Digite ou fale o que deseja anotar..."
+                  placeholder="Digite o que deseja anotar..."
                   {...register("textContent")}
                 ></textarea>
               </div>
@@ -78,6 +78,7 @@ export function NewNoteCard() {
                   )}
                 </button>
                 <button
+                  aria-label="Salvar nota"
                   data-testid="submit-create"
                   className="bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:scale-105"
                   type="submit"

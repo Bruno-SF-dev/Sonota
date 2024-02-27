@@ -3,11 +3,9 @@
 ##### Componente de listagem: NoteList
 
 - [x] Exibir o Loader quando os dados estiverem sendo carregados.
-- [x] Exibir a Lista de Notas quando os dados estiverem carregados e houver notas para exibir.
-- [x] Exibir a mensagem informando que não há notas e botão de criar quando os dados estiverem carregados e não houver notas para exibir.
-- [x] Exibir o Loader e, depois que os dados estiverem carregados, a Lista de Notas.
-- [ ] Filtrar nota e ver se apenas ela é renderizada na listagem.
-- [ ] Criar nova nota e ver se ela é renderizada na listagem.
+- [x] Exibir a Lista de Notas quando não estiver carregando e houver notas para exibir.
+- [x] Exibir a mensagem informando que não há notas e botão de criar quando quando não estiver carregando e não houver notas para exibir.
+- [x] Exibir o Loader e, depois que os dados do Mock estiverem carregados, a Lista de Notas.
 
 ##### Componente de Nota: NoteCard
 
@@ -24,3 +22,9 @@
 
 - [x] Renderizar campo de busca corretamente.
 - [x] Digitar no campo, clicar no botão para filtrar e ver se o onSubmitSearchNote é chamado com o valor digitado.
+
+##### Página: Notes
+
+- [x] Renderizar loader e, depois, campo de busca, listagem e botão para criar nota.
+- [x] Filtrar nota e ver se apenas ela é renderizada na listagem.
+- [x] Criar nova nota e ver se ela é renderizada na listagem.

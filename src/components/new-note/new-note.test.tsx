@@ -8,10 +8,10 @@ describe("Componente: NewNote", () => {
   test("Renderizar o botão de criar nova nota, clicar nele, abrir o modal e clicar para fechar o modal.", async () => {
     customRender(<NewNoteCard />);
 
-    const btnNewNote = screen.getByTestId("trigger-new-note-modal");
+    const btnNewNote = screen.getByLabelText("Criar nota");
     fireEvent.click(btnNewNote);
 
-    expect(await screen.findByTestId("new-note-modal")).toBeInTheDocument();
+    await screen.findByTestId("new-note-modal");
 
     const btnCloseNewNoteModal = screen.getByTestId("close-new-note-modal");
     fireEvent.click(btnCloseNewNoteModal);
@@ -28,7 +28,7 @@ describe("Componente: NewNote", () => {
     });
 
     customRender(<NewNoteCard />);
-    const btnNewNote = screen.getByTestId("trigger-new-note-modal");
+    const btnNewNote = screen.getByLabelText("Criar nota");
     fireEvent.click(btnNewNote);
 
     await screen.findByTestId("new-note-modal");

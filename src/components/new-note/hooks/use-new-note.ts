@@ -39,7 +39,7 @@ export const useNewNote = () => {
     try {
       await createNoteFn({ textContent, title });
 
-      toast.success("Nota criada!");
+      toast.success("Nota criada com sucesso!");
       resetField("textContent");
       resetField("title");
     } catch (error) {}

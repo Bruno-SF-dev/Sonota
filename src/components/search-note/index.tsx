@@ -13,7 +13,6 @@ export const NoteSearch = () => {
         <div className="w-full flex">
           <label htmlFor="searchText"></label>
           <input
-            data-testid="search-note-field"
             className="w-full bg-neutral-950/80 py-2 px-4 text-base tracking-tight placeholder:text-slate-200/40 outline-none"
             placeholder="Busque suas notas..."
             {...register("search")}
@@ -21,7 +20,7 @@ export const NoteSearch = () => {
           />
         </div>
         <button
-          data-testid="submit-search-note"
+          aria-label="Buscar nota"
           className="height-full px-6 flex items-center gap-4 bg-black whitespace-nowrap font-semibold text-xl text-neutral-500 focus-visible:outline outline-2 outline-offset-[-2px] outline-green-default"
         >
           <Search />
