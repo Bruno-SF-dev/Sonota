@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { INote } from "../types/note-type";
-
-interface IGetAllNotes {
+import { generateUUID } from "../utils/uuid-generate";
+export interface IGetAllNotes {
   search: string | null;
 }
 
@@ -35,7 +35,7 @@ export const createNote = async ({ textContent, title }: ICreateNote) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     date: new Date(),
     title,
     content: textContent,

@@ -7,8 +7,6 @@ export const useNoteList = () => {
 
   const search = searchParams.get("search");
 
-  console.log("===> useNoteList: search", search);
-
   const { data, isFetching } = useQuery({
     queryKey: ["note-list", search],
     queryFn: () => getAllNotes({ search: search }),
