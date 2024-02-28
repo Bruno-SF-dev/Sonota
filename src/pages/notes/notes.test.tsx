@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import * as useSearchParams from "react-router-dom";
 import { Notes } from ".";
 import * as useSubmitSearchNote from "../../components/search-note/hooks/use-submit-search";
-import * as api from "../../data/notes";
+import * as api from "../../data/api";
 import { customRender } from "../../tests/custom-render";
 import { mockGetAllNotes } from "../../tests/mocks/get-all-notes";
 import * as generateUUID from "../../utils/uuid-generate";

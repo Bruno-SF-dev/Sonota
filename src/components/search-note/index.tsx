@@ -1,11 +1,14 @@
 import { Search } from "lucide-react";
+import logo from "../../assets/sonota2.svg";
 import { useSearchNote } from "./hooks/use-search-note";
 
 export const NoteSearch = () => {
   const { handleSearchNote, register } = useSearchNote();
 
   return (
-    <div className="flex items-center max-w-6xl justify-end gap-4">
+    <div className="flex items-center max-w-6xl justify-between gap-4">
+      <img src={logo} alt="NLW Experts" className="h-16" />
+
       <form
         onSubmit={handleSearchNote}
         className="w-full max-w-md flex rounded-md overflow-hidden"

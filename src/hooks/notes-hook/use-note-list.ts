@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
-import { getAllNotes } from "../../data/notes";
+import { getAllNotes } from "../../data/api";
 
 export const useNoteList = () => {
   const [searchParams] = useSearchParams();

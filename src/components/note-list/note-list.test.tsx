@@ -1,6 +1,6 @@
 import { screen, waitFor } from "@testing-library/react";
 import { NoteList } from ".";
-import * as api from "../../data/notes";
+import * as api from "../../data/api";
 import * as useNoteList from "../../hooks/notes-hook/use-note-list";
 import { customRender } from "../../tests/custom-render";
 import { mockGetAllNotes, mockNotes } from "../../tests/mocks/get-all-notes";

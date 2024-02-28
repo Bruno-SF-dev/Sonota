@@ -1,16 +1,8 @@
-import { faker } from "@faker-js/faker";
-import { INote } from "../types/note-type";
 import { generateUUID } from "../utils/uuid-generate";
+import { allNotes } from "./all-notes";
 export interface IGetAllNotes {
   search: string | null;
 }
-
-const allNotes: INote[] = Array.from({ length: 18 }).map(() => ({
-  id: faker.string.uuid(),
-  date: faker.date.anytime(),
-  title: faker.lorem.words({ min: 2, max: 3 }),
-  content: faker.lorem.text(),
-}));
 
 export const getAllNotes = async ({ search }: IGetAllNotes) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));

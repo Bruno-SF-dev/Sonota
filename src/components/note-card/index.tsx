@@ -15,7 +15,7 @@ export function NoteCard({
       <Dialog.Trigger asChild>
         <button
           data-testid="trigger-view-note-modal"
-          className="rounded-md text-left flex flex-col bg-neutral-950/90 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-green-default transition hover:scale-105"
+          className="rounded-md text-left flex flex-col bg-neutral-950/100 outline-none focus-visible:ring-2 focus-visible:ring-green-default transition hover:scale-105"
         >
           <div className="flex flex-1 flex-col gap-3 w-full px-5 pt-3 overflow-hidden relative">
             <span
@@ -37,9 +37,11 @@ export function NoteCard({
 
           <div
             data-testid={`note-card-title-${id}`}
-            className="w-full flex items-center min-h-12 px-5 bg-black text-lg text-slate-300 font-semibold pointer-events-none"
+            className="w-full flex items-center min-h-12 py-2 px-5 bg-black pointer-events-none"
           >
-            {title}
+            <p className="text-lg text-slate-300 font-semibold truncate">
+              {title}
+            </p>
           </div>
         </button>
       </Dialog.Trigger>

@@ -1,4 +1,4 @@
-import { IGetAllNotes } from "../../data/notes";
+import { IGetAllNotes } from "../../data/api";
 import { INote } from "../../types/note-type";
 
 export const mockNotes: INote[] = [
