@@ -9,6 +9,7 @@ export function NewNoteCard() {
     isRecording,
     handleCreateNote,
     register,
+    errors,
   } = useNewNote();
 
   return (
@@ -44,25 +45,39 @@ export function NewNoteCard() {
                   Adicionar nota
                 </span>
 
-                <input
-                  data-testid="title-field"
-                  autoFocus
-                  placeholder="Título da nota..."
-                  className="text-lg font-bold leading-6 text-slate-200 bg-transparent placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
-                  {...register("title")}
-                />
+                <div className="space-y-1">
+                  <input
+                    data-testid="title-field"
+                    autoFocus
+                    placeholder="Título da nota..."
+                    className="w-full text-lg font-bold leading-6 text-slate-200 bg-transparent placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
+                    {...register("title")}
+                  />
+                  {errors.title && (
+                    <p className="text-sm text-red-600">
+                      {errors.title.message}
+                    </p>
+                  )}
+                </div>
 
-                <textarea
-                  data-testid="content-field"
-                  className="text-base leading-6 text-slate-200 bg-transparent resize-none flex-1 placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
-                  placeholder="Digite o que deseja anotar..."
-                  {...register("textContent")}
-                ></textarea>
+                <div className="space-y-1 flex flex-col flex-1">
+                  <textarea
+                    data-testid="content-field"
+                    className="w-full h-full text-base leading-6 text-slate-200 bg-transparent resize-none flex-1 placeholder:text-slate-300/40 p-3 border border-neutral-800 rounded-md focus:outline-none focus:ring focus:ring-neutral-600"
+                    placeholder="Digite o que deseja anotar..."
+                    {...register("textContent")}
+                  ></textarea>
+                  {errors.textContent && (
+                    <p className="text-sm text-red-600">
+                      {errors.textContent.message}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="flex justify-center gap-2 p-4 bg-black/40">
                 <button
-                  className="flex items-center justify-center gap-2 bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:scale-105"
+                  className="flex items-center justify-center gap-2 bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:brightness-90"
                   type="button"
                   onClick={
                     isRecording ? handleStopRecording : handleStartRecording
@@ -80,7 +95,7 @@ export function NewNoteCard() {
                 <button
                   aria-label="Salvar nota"
                   data-testid="submit-create"
-                  className="bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:scale-105"
+                  className="bg-green-default p-4 rounded-full text-neutral-900 font-medium outline-none transition hover:brightness-90"
                   type="submit"
                 >
                   <Check />
