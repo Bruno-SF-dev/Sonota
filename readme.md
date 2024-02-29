@@ -8,22 +8,22 @@ O Projeto foi focado para estudos de **Testes Unitários** e **Testes de Integra
 
 ## Tecnologias Utilizadas
 
-- [**Typescript**](https://www.typescriptlang.org/)
-- [**React JS**](https://pt-br.legacy.reactjs.org/)
+- [**React JS**](https://pt-br.legacy.reactjs.org/) & [**Typescript**](https://www.typescriptlang.org/) 
 
 - [**Tailwind CSS**](https://tailwindcss.com/): O Tailwind CSS foi empregado para estilizar a aplicação de forma rápida e consistente, utilizando classes utilitárias.
 
 - [**React Hook Form**](https://react-hook-form.com/): O React Hook Form foi incorporado para simplificar a lógica de formulários e melhorar o gerenciamento de estados do formulário.
+  
+- [**React Query**](https://tanstack.com/query/v3/): Usado para gerenciar globalmente as requisições feitas na aplicação. Foi utilizado o conceito de URL State na busca de notas, para garantir uma experiência de usuário consistente e reativa.
 
 - [**Jest**](https://jestjs.io/) & [**Testing Library**](https://testing-library.com/): Estrutura escolhida para realizar testes unitários, garantindo a qualidade e confiabilidade do código. Focado em testes que refletem o comportamento real do usuário.
 
-- **URL State**: Utilizamos o conceito de URL State para garantir uma experiência de usuário consistente e reativa.
 
 ## Funcionalidades
 
 1. **Listagem de Anotações**: Visualize todas as suas anotações de forma organizada.
 
-2. **Componente de Busca**: Utilize o componente de busca para filtrar anotações com base em palavras-chave.
+2. **Componente de Busca**: Utilize o componente de busca para filtrar anotações com base em palavras-chave, utilizando o conceito de URL State.
 
 3. **Formulário para Criar Anotação**: Crie novas anotações facilmente inserindo título e descrição.
 
