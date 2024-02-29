@@ -3,11 +3,17 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { formatDate } from "date-fns/format";
 import { NoteCard } from ".";
+import * as useNoteActions from "../../hooks/notes-hook/use-note-actions";
 import { INote } from "../../types/note-type";
 
 jest.mock("date-fns/format", () => ({
   formatDate: jest.fn(),
 }));
+
+jest.spyOn(useNoteActions, "useNoteActions").mockReturnValue({
+  createNoteFn: jest.fn(),
+  handleDeleteNote: jest.fn(),
+});
 
 describe("Componente: NoteCard", () => {
   test("Renderizar as informações da nota corretamente", () => {
