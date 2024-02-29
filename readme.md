@@ -31,7 +31,7 @@ O Projeto foi focado para estudos de **Testes Unitários** e **Testes de Integra
 
 ## Configuração do Projeto
 
-Certifique-se de ter o Node.js e o npm instalados em sua máquina. Após clonar o repositório, execute os seguintes comandos:
+Após clonar o repositório, execute os seguintes comandos:
 
 ```bash
 # Instalar dependências
