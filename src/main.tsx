@@ -12,6 +12,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>
-    <Toaster richColors />
+    <Toaster richColors position="bottom-center" />
   </React.StrictMode>
 );
