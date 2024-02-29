@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Check, Mic, Plus, X } from "lucide-react";
 import { useNewNote } from "./hooks/use-new-note";
 
-export function NewNoteCard() {
+export function NewNote() {
   const {
     handleStartRecording,
     handleStopRecording,
@@ -10,10 +10,13 @@ export function NewNoteCard() {
     handleCreateNote,
     register,
     errors,
+    onClearModalState,
+    modalIsOpen,
+    setModalIsOpen,
   } = useNewNote();
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={modalIsOpen} onOpenChange={setModalIsOpen}>
       <Dialog.Trigger asChild>
         <button
           aria-label="Criar nota"
@@ -30,7 +33,7 @@ export function NewNoteCard() {
             data-testid="new-note-modal"
             className="z-10 fixed flex-1 w-full md:max-w-[640px] md:h-[60vh] bg-neutral-950 md:rounded-md flex flex-col overflow-hidden inset-0 md-inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
           >
-            <Dialog.Close asChild>
+            <Dialog.Close asChild onClick={onClearModalState}>
               <button
                 data-testid="close-new-note-modal"
                 className="absolute right-0 top-0  bg-neutral-800 p-1.5 hover:text-slate-400 outline-none"

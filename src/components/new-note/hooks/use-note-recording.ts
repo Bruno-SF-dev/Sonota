@@ -58,5 +58,6 @@ export const useRecordingHook = () => {
     handleStartRecording,
     handleStopRecording,
     transcription,
+    setTranscription,
   };
 };

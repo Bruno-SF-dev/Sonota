@@ -1,5 +1,5 @@
 import { useNoteList } from "../../hooks/notes-hook/use-note-list";
-import { NewNoteCard } from "../new-note";
+import { NewNote } from "../new-note";
 import { NoteCard } from "../note-card";
 
 export const NoteList = () => {
@@ -9,20 +9,20 @@ export const NoteList = () => {
     return (
       <>
         {!!notes?.length ? (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[180px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[180px]">
             {notes?.map((note) => (
               <NoteCard note={note} key={note.id} />
             ))}
 
             <div className="fixed bottom-8 right-8 md:right-[264px] z-5">
-              <NewNoteCard />
+              <NewNote />
             </div>
           </div>
         ) : (
           <div className="flex-1 flex flex-col gap-4 items-center justify-center rounded-2xl">
             <p className="text-2xl text-slate-300">Crie suas anotações aqui</p>
 
-            <NewNoteCard />
+            <NewNote />
           </div>
         )}
       </>

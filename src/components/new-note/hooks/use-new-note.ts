@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -17,6 +17,7 @@ const createNoteSchema = z.object({
 });
 
 export const useNewNote = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { createNoteFn } = useNoteActions();
 
   const {
@@ -34,19 +35,28 @@ export const useNewNote = () => {
     handleStopRecording,
     isRecording,
     transcription,
+    setTranscription,
   } = useRecordingHook();
 
   useEffect(() => {
     setValue("textContent", transcription);
   }, [transcription]);
 
+  const onClearModalState = () => {
+    resetField("textContent");
+    resetField("title");
+    setTranscription("");
+    handleStopRecording();
+  };
+
   const handleCreateNote = hookFormSubmit(async ({ title, textContent }) => {
+    handleStopRecording();
     try {
       await createNoteFn({ textContent, title });
 
       toast.success("Nota criada com sucesso!");
-      resetField("textContent");
-      resetField("title");
+      setModalIsOpen(false);
+      onClearModalState();
     } catch (error) {}
   });
 
@@ -57,5 +67,8 @@ export const useNewNote = () => {
     handleCreateNote,
     register,
     errors,
+    onClearModalState,
+    modalIsOpen,
+    setModalIsOpen,
   };
 };

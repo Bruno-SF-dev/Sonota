@@ -1,12 +1,12 @@
 import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { NewNoteCard } from ".";
+import { NewNote } from ".";
 import * as useNoteActions from "../../hooks/notes-hook/use-note-actions";
 import { customRender } from "../../tests/custom-render";
 
 describe("Componente: NewNote", () => {
   test("Renderizar o botão de criar nova nota, clicar nele, abrir o modal e clicar para fechar o modal.", async () => {
-    customRender(<NewNoteCard />);
+    customRender(<NewNote />);
 
     const btnNewNote = screen.getByLabelText("Criar nota");
     fireEvent.click(btnNewNote);
@@ -27,7 +27,7 @@ describe("Componente: NewNote", () => {
       handleDeleteNote: jest.fn(),
     });
 
-    customRender(<NewNoteCard />);
+    customRender(<NewNote />);
     const btnNewNote = screen.getByLabelText("Criar nota");
     fireEvent.click(btnNewNote);
 
