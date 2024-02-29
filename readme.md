@@ -7,6 +7,7 @@ O Sonota é um projeto frontend desenvolvido para criar e gerenciar anotações 
 O Projeto foi focado para estudos de **Testes Unitários** e **Testes de Integração**.
 
 ## Tecnologias Utilizadas
+[![My Skills](https://skillicons.dev/icons?i=react,typescript,tailwind,vite,jest)](https://skillicons.dev)
 
 - [**React JS**](https://pt-br.legacy.reactjs.org/) & [**Typescript**](https://www.typescriptlang.org/) 
 
