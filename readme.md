@@ -4,7 +4,7 @@
 
 O Sonota é um projeto frontend desenvolvido para criar e gerenciar anotações de maneira eficiente e intuitiva. Esta aplicação oferece uma interface amigável para listar, buscar e criar anotações. Além disso, destaca-se pela capacidade de criar anotações tanto por digitação quanto por áudio, utilizando a API SpeechRecognition do navegador.
 
-O Projeto foi focado para estudos de **Testes Unitários** e **Testes de Integração**.
+O Projeto foi focado para estudos de **Testes Unitários**, **Testes de Integração** e da **API SpeechRecognition**.
 
 ## Tecnologias
 [![My Skills](https://skillicons.dev/icons?i=react,typescript,tailwind,vite,jest)](https://skillicons.dev)
