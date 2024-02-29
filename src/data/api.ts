@@ -33,3 +33,9 @@ export const createNote = async ({ textContent, title }: ICreateNote) => {
     content: textContent,
   };
 };
+
+export const deleteNote = async (id: string) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  return allNotes.filter((note) => note.id !== id);
+};

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useSearchParams } from "react-router-dom";
-import { createNote } from "../../data/api";
+import { toast } from "sonner";
+import { createNote, deleteNote } from "../../data/api";
 import { INote } from "../../types/note-type";
 
 export const useNoteActions = () => {
@@ -27,7 +28,26 @@ export const useNoteActions = () => {
     },
   });
 
-  const handleDeleteNote = () => {};
+  const { mutateAsync: deleteNoteFn } = useMutation({
+    mutationFn: deleteNote,
+    onSuccess(dataFromApi) {
+      queryClient.setQueryData<INote[] | undefined>(
+        ["note-list", search],
+        () => {
+          return [...dataFromApi];
+        }
+      );
+    },
+  });
+
+  const handleDeleteNote = async (id: string) => {
+    try {
+      await deleteNoteFn(id);
+      toast.info("Nota deletada");
+    } catch {
+      toast.error("Erro ao deletar nota");
+    }
+  };
 
   return {
     createNoteFn,

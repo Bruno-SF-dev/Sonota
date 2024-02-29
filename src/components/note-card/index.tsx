@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { formatDate } from "date-fns/format";
-import { X } from "lucide-react";
+import { Trash, X } from "lucide-react";
+import { useNoteActions } from "../../hooks/notes-hook/use-note-actions";
 import { INote } from "../../types/note-type";
 
 interface INoteCardProps {
@@ -10,6 +11,8 @@ interface INoteCardProps {
 export function NoteCard({
   note: { id, date, title, content },
 }: INoteCardProps) {
+  const { handleDeleteNote } = useNoteActions();
+
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
@@ -80,6 +83,17 @@ export function NoteCard({
               >
                 {content}
               </p>
+            </div>
+
+            <div className="flex justify-center gap-2 p-4 bg-black/40">
+              <button
+                onClick={() => handleDeleteNote(id)}
+                aria-label="Apagar nota"
+                data-testid="submit-delete"
+                className="bg-neutral-800 p-4 rounded-full text-neutral-200 font-medium outline-none transition hover:brightness-90"
+              >
+                <Trash />
+              </button>
             </div>
           </div>
         </Dialog.Content>
